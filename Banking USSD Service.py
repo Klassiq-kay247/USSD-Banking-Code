@@ -34,6 +34,17 @@ def get_valid_int(prompt, min_val=None, max_val=None):
         except ValueError:
             print("Invalid input. Please enter a number.")
             
+            
+# Helper function to get a valid account number with at least 10 digits
+def get_valid_account_number(prompt):
+    while True:
+        account_number = input(prompt)
+        # Ensure the input is numeric and has 10 digits
+        if account_number.isdigit() and len(account_number) == 10:
+            return account_number
+        else:
+            print("Invalid account number. It must be exactly 10 digits.")
+            
         
 def get_valid_string(prompt):
     while True:
@@ -116,9 +127,11 @@ while ussd_service:
             if bank_name > len(list_of_banks):
                 print("Invalid bank selection.")
                 continue
+            
+        # Get a valid account number
+        account_number = get_valid_account_number("Enter account number: ")
 
-        # Get transfer details
-        account_number = get_valid_int("Enter account number: ")
+    
         amount_to_transfer = get_valid_int("Enter amount: ")
 
         # Check if the balance is sufficient
